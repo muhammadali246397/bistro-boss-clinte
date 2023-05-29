@@ -1,23 +1,23 @@
 import React from 'react';
 import CommonCover from '../../Shared/CommonCover/CommonCover';
-import pizza from '../../../assets/menu/pizza-bg.jpg'
+import img from '../../../assets/menu/soup-bg.jpg'
 import UseMenu from '../../Shared/CoustomHooks/UseMenu';
 import PopularMenu from '../../Shared/PopularMenu/PopularMenu';
 
-const Pizza = () => {
-    const [menu] = UseMenu();
-    const pizzas = menu.filter(items => items.category === 'pizza')
+const Soup = () => {
+    const [menu] = UseMenu()
+    const soup = menu.filter(items => items.category === 'soup')
     return (
-        <div className='my-20'>
+        <div>
             <CommonCover
-            bannar={pizza}
-            header={'pizzas'}
-            title={'Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.'}
+                bannar={img}
+                header={'soups'}
+                title={'LOREM IPSUM HAS BEEN THE INDUSTRY’S STANDARD DUMMY TEXT EVER SINCE THE 1500S, WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK.'}
             ></CommonCover>
-             <div className='my-20'>
+            <div className='my-20'>
                 <div className='grid md:grid-cols-2 gap-10'>
                     {
-                        pizzas.map(item => <PopularMenu
+                        soup.map(item => <PopularMenu
                             key={item._id}
                             items={item}
                         ></PopularMenu>)
@@ -28,4 +28,4 @@ const Pizza = () => {
     );
 };
 
-export default Pizza;
+export default Soup;

@@ -5,6 +5,7 @@ const Navigation = () => {
   const nabitems = <>
    <li><Link to="/">Home</Link></li>
    <li><Link to="/ourmenu">Our Menu</Link></li>
+   <li><Link to="/ourshop">Our Shop</Link></li>
   </>
 
 

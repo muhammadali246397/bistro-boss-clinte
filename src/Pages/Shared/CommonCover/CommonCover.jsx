@@ -8,7 +8,7 @@ const CommonCover = ({ bannar, title, header }) => {
             blur={{ min: -15, max: 15 }}
             bgImage={bannar}
             bgImageAlt="the dog"
-            strength={-200}
+            strength={-300}
         >
             <div className='h-[600px] flex justify-center items-center' >
 

@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthPorvider';
 
 const Navigation = () => {
+  const {user,LogOut} = useContext(AuthContext)
+
+  const handleLogout = () => {
+    LogOut();
+  }
+
   const nabitems = <>
    <li><Link to="/">Home</Link></li>
    <li><Link to="/ourmenu">Our Menu</Link></li>
    <li><Link to="/ourshop">Our Shop</Link></li>
+  
+   <li><Link to="/signup">SignUp</Link></li>
+   {user ? <>
+    <button onClick={handleLogout} className='btn btn-warning'>Log Out</button>
+   </>:<>
+   <li><Link to="/login">Login</Link></li>
+   </> }
   </>
 
 

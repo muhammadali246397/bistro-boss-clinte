@@ -1,25 +1,37 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthPorvider';
+import { FaShoppingCart } from 'react-icons/fa';
+import Usequery from '../CoustomHooks/useQuery';
+
+
+
 
 const Navigation = () => {
-  const {user,LogOut} = useContext(AuthContext)
+        
+        const { user, LogOut,loading, } = useContext(AuthContext)
+        const [cart] = Usequery()
+        
+ 
 
   const handleLogout = () => {
     LogOut();
   }
 
   const nabitems = <>
-   <li><Link to="/">Home</Link></li>
-   <li><Link to="/ourmenu">Our Menu</Link></li>
-   <li><Link to="/ourshop">Our Shop</Link></li>
-  
-   <li><Link to="/signup">SignUp</Link></li>
-   {user ? <>
-    <button onClick={handleLogout} className='btn btn-warning'>Log Out</button>
-   </>:<>
-   <li><Link to="/login">Login</Link></li>
-   </> }
+    <li><Link to="/">Home</Link></li>
+    <li><Link to="/ourmenu">Our Menu</Link></li>
+    <li><Link to="/ourshop">Our Shop</Link></li>
+    <li><Link to="/signup">SignUp</Link></li>
+    <li><Link to='/dashbord/mycart'><button className="btn">
+      <FaShoppingCart></FaShoppingCart>
+      <div className="badge badge-secondary mx-2">{cart.length || 0}</div>
+    </button></Link></li>
+    {user ? <>
+      <button onClick={handleLogout} className='btn btn-warning'>Log Out</button>
+    </> : <>
+      <li><Link to="/login">Login</Link></li>
+    </>}
   </>
 
 
@@ -39,7 +51,7 @@ const Navigation = () => {
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-           {nabitems}
+            {nabitems}
           </ul>
         </div>
         <div className="navbar-end">

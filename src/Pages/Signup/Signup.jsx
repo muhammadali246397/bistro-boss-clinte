@@ -6,15 +6,36 @@ import img2 from '../../assets/others/authentication2.png'
 import { AuthContext } from '../AuthProvider/AuthPorvider';
 
 const Signup = () => {
-    const {handleSignUp} = useContext(AuthContext)
-    const { register, handleSubmit } = useForm();
+       
+        const {handleSignUp,  updateuser} = useContext(AuthContext)
+    const { register, handleSubmit, reset } = useForm();
         const onSubmit = data => {
-            handleSignUp(data.email,data.password)
+            const {email,password,name,photo} = data
+            handleSignUp(email,password)
             .then(result => {
-                console.log(result.user)
-                alert('sing up successfull')
+                const users = result.user
+                console.log(users)
+                updateuser(name,photo)
+                .then(() => {
+                    const allUser = {name:name,email:email}
+                    fetch('http://localhost:4000/user',{
+                        method:'POST',
+                        headers:{
+                            "content-type":"application.json"
+                        },
+                        body:JSON.stringify(allUser)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                    reset()
+                    alert('profile updated')
+                })
+                .catch((error) => console.log(error.message))
+              
             })
-            .catch(error => console.log(error))
+           
         };
     return (
         <div style={{ backgroundImage: `url(${img})` }} className="hero max-h-screen">
@@ -30,6 +51,12 @@ const Signup = () => {
                             <span className="label-text">Name</span>
                         </label>
                         <input type="text"  {...register("name")} placeholder="Name" className="input input-bordered" />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Photo Url</span>
+                        </label>
+                        <input type="text"  {...register("photo")} placeholder="Pthoto Url" className="input input-bordered" />
                     </div>
                     <div className="form-control">
                         <label className="label">

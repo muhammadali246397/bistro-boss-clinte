@@ -10,7 +10,7 @@ import { Rating } from '@smastrom/react-rating';
 const Featured = () => {
     const [fetaurers, setFetaures] = useState([]);
     useEffect(() => {
-        fetch('review.json')
+        fetch('http://localhost:4000/review')
             .then(res => res.json())
             .then(data => setFetaures(data))
     }, [])

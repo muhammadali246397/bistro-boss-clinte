@@ -9,6 +9,13 @@ import ShopMainPage from "../Pages/OurShop/ShopPage/ShopMainPage";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Dashbord from "../Layout/Dashbord/Dashbord";
+import Mycart from "../Pages/DashbordPage/Mycart/Mycart";
+import DashbordHome from "../Pages/DashbordPage/DashbordHome/DashbordHome";
+import DashbordReservetion from "../Pages/DashbordPage/DashbordReservetion/DashbordReservetion";
+import DsPayment from "../Pages/DashbordPage/DsPayment/DsPayment";
+import DsReview from "../Pages/DashbordPage/DsReview/DsReview";
+import DsBooking from "../Pages/DashbordPage/DsBooking/DsBooking";
 
   const router = createBrowserRouter([
     {
@@ -37,6 +44,36 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
         }
       ]
     },
+    {
+      path:'dashbord',
+      element:<PrivateRoute><Dashbord></Dashbord></PrivateRoute>,
+      children:[
+        {
+          path:'mycart',
+          element:<Mycart></Mycart>
+        },
+        {
+          path:'home',
+          element:<DashbordHome></DashbordHome>
+        },
+        {
+          path:'reservation',
+          element:<DashbordReservetion></DashbordReservetion>
+        },
+        {
+          path:'history',
+          element:<DsPayment></DsPayment>
+        },
+        {
+          path:'review',
+          element:<DsReview></DsReview>
+        },
+        {
+          path:'booking',
+          element:<DsBooking></DsBooking>
+        }
+      ]
+    }
   ]);
 
   export default(router)

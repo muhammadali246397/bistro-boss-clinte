@@ -16,6 +16,7 @@ import DashbordReservetion from "../Pages/DashbordPage/DashbordReservetion/Dashb
 import DsPayment from "../Pages/DashbordPage/DsPayment/DsPayment";
 import DsReview from "../Pages/DashbordPage/DsReview/DsReview";
 import DsBooking from "../Pages/DashbordPage/DsBooking/DsBooking";
+import User from "../Pages/DashbordPage/AdminPanel/Users/User";
 
   const router = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ import DsBooking from "../Pages/DashbordPage/DsBooking/DsBooking";
         {
           path:'booking',
           element:<DsBooking></DsBooking>
+        },
+        {
+          path:'user',
+          element:<User></User>
         }
       ]
     }

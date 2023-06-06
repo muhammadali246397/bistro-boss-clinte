@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query'
 import Title from '../../../Shared/TitleComponent/Title';
 import { FaTrashAlt, FaUsers } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 const User = () => {
     const { data: users = [], refetch } = useQuery(['user'], async () => {
@@ -11,6 +12,27 @@ const User = () => {
     console.log(users)
 
     const handleDelete = id => {
+
+    }
+
+    const updateAdmin = (id) => {
+        console.log(id)
+        fetch(`http://localhost:4000/user/admin/${id}`,{
+            method:'PATCH',
+        })
+        .then(res => res.json())
+        .then(data => {
+           if(data.modifiedCount>0){
+            refetch()
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: `admin done`,
+                showConfirmButton: false,
+                timer: 1500
+              })
+           }
+        })
 
     }
 
@@ -41,9 +63,9 @@ const User = () => {
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>{
-                            user.role === 'admin'? 'admin':<button className="btn rounded-none bg-[#D1A054] text-white border-none  btn-xs"><FaUsers></FaUsers></button>
+                            user.role === 'admin'? 'admin':<button onClick={() => updateAdmin(user._id)} className="btn rounded-none bg-[#D1A054] text-white border-none  btn-xs"><FaUsers></FaUsers></button>
                             }</td>
-                        <td><button onClick={() => handleDelete(item._id)} className="btn rounded-none bg-[#B91C1C] text-white border-none  btn-xs"><FaTrashAlt></FaTrashAlt></button></td>
+                        <td><button onClick={() => handleDelete(user._id)} className="btn rounded-none bg-[#B91C1C] text-white border-none  btn-xs"><FaTrashAlt></FaTrashAlt></button></td>
                     </tr>)
                 }
 
